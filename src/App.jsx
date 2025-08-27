@@ -61,7 +61,7 @@ function App() {
 
   useEffect(() => {
     fetchAllApis();
-    const interval = setInterval(fetchAllApis, 300000); // every 10 mins
+    const interval = setInterval(fetchAllApis, 300000); // every 5 mins
     return () => clearInterval(interval);
   }, []);
 
@@ -73,9 +73,13 @@ function App() {
     });
   };
 
+  const clearLogs = () => {
+    setLogs([]);
+  };
+
   const isDark = theme === "dark";
 
-  // Ensure body background matches theme (removes white border around root div)
+  // Ensure body background matches theme
   useEffect(() => {
     document.body.style.backgroundColor = isDark ? "#121212" : "#f5f5f5";
     document.body.style.margin = 0;
@@ -88,7 +92,7 @@ function App() {
         background: isDark ? "#121212" : "#f5f5f5",
         color: isDark ? "#f5f5f5" : "#121212",
         minHeight: "100vh",
-        transition: "all 0.3s ease", // smooth transition
+        transition: "all 0.3s ease",
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -160,9 +164,11 @@ function App() {
                   background: isDark ? "#2c2c2c" : "#f9f9f9",
                   color: isDark ? "#ddd" : "#000",
                   transition: "all 0.3s ease",
+                  whiteSpace: "pre-wrap", // wrap long JSON
+                  wordWrap: "break-word",
                 }}
               >
-                {data[i] ? data[i].slice(0, 200) + "" : "No data yet"}
+                {data[i] ? data[i].slice(0, 200) + "..." : "No data yet"}
               </pre>
             </div>
           ))}
@@ -170,6 +176,7 @@ function App() {
             onClick={fetchAllApis}
             style={{
               marginBottom: "20px",
+              marginRight: "10px",
               padding: "10px 20px",
               background: "#007bff",
               color: "white",
@@ -179,6 +186,20 @@ function App() {
             }}
           >
             🔄 Ping All APIs
+          </button>
+          <button
+            onClick={clearLogs}
+            style={{
+              marginBottom: "20px",
+              padding: "10px 20px",
+              background: "#dc3545",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            🗑️ Clear Logs
           </button>
         </div>
 
