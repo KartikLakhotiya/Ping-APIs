@@ -61,7 +61,7 @@ function App() {
 
   useEffect(() => {
     fetchAllApis();
-    const interval = setInterval(fetchAllApis, 600000); // every 10 mins
+    const interval = setInterval(fetchAllApis, 300000); // every 10 mins
     return () => clearInterval(interval);
   }, []);
 
