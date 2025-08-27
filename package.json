@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "proxy": "https://ems-25p6.onrender.com/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
